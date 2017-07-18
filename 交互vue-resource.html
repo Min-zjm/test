@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src='js/vue.js'></script>
+		<script type="text/javascript" src='js/vue-resource.js'></script>
+			
+		
+	</head>
+	<body>
+		<div id="box">
+			<p>{{msg}}</p>
+			<button @click='get'>get</button>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		  new Vue({
+		  	 el:"#box",
+		  	 data:{
+		  	 	 msg:'1213'
+		  	 },
+		  	 methods:{
+		  	 	get:function(){    //地址  ， 参数
+//		  	 		this.$http.get('a.txt','').then(function(data){
+//		  	 			 console.log(data)
+//		  	 			 this.msg=data.data
+//		  	 		},function(data){
+//		  	 			  console.log(data)   //失败结果
+//		  	 		})
+                    //请求某个数据，通过请求地址（接口）--$http.jsonp
+                    this.$http.jsonp('https://sug.so.360.cn/suggest',{word:'a'},
+                    {jsonp:'callback'}).then(function(data){            
+                    	console.log(data.data)
+                    	 this.msg=data.data      //成功
+                    },function(data){
+		  	 			  alert('请求失败')
+                    })
+		  	 	}
+		  	 }
+		  })
+	</script>
+</html>
